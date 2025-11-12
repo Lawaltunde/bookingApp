@@ -1,4 +1,4 @@
-package com.sudburyRide.user;
+package com.devlawal.user;
 
 import java.util.UUID;
 

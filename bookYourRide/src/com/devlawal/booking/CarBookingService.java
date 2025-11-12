@@ -1,11 +1,10 @@
-package com.sudburyRide.booking;
+package com.devlawal.booking;
 
-import com.sudburyRide.car.Car;
-import com.sudburyRide.car.CarService;
-import com.sudburyRide.user.User;
+import com.devlawal.car.Car;
+import com.devlawal.car.CarService;
+import com.devlawal.user.User;
 
 import java.time.LocalDateTime;
-import java.util.Locale;
 import java.util.UUID;
 
 public class CarBookingService {

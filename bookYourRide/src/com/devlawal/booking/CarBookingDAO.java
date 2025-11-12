@@ -1,4 +1,4 @@
-package com.sudburyRide.booking;
+package com.devlawal.booking;
 
 public class CarBookingDAO {
 

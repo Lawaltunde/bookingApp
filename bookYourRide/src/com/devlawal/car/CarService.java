@@ -1,4 +1,4 @@
-package com.sudburyRide.car;
+package com.devlawal.car;
 
 public class CarService {
     private final CarDAO carDAO = new CarDAO();

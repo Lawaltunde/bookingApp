@@ -1,10 +1,10 @@
-package com.sudburyRide;
+package com.devlawal;
 
-import com.sudburyRide.booking.CarBooking;
-import com.sudburyRide.booking.CarBookingService;
-import com.sudburyRide.car.Car;
-import com.sudburyRide.user.User;
-import com.sudburyRide.user.UserService;
+import com.devlawal.booking.CarBooking;
+import com.devlawal.booking.CarBookingService;
+import com.devlawal.car.Car;
+import com.devlawal.user.User;
+import com.devlawal.user.UserService;
 
 import java.util.Scanner;
 import java.util.UUID;
@@ -126,13 +126,13 @@ public class Main {
     }
 
     public static void displayMenu(){
-        System.out.println("\n1\uFE0F⃣ - Book Car\n" +
-                "2\uFE0F⃣ - View All User Booked Cars \n" +
-                "3\uFE0F⃣ - View All Bookings\n" +
-                "4\uFE0F⃣ - View Available Cars\n" +
-                "5\uFE0F⃣ - View Available Electric Cars\n" +
-                "6\uFE0F⃣ - View all users\n" +
-                "7\uFE0F⃣ - Exit");
+        System.out.println("\n1\uFE0F\u20E3 - Book Car\n" +
+                "2\uFE0F\u20E3 - View All User Booked Cars \n" +
+                "3\uFE0F\u20E3 - View All Bookings\n" +
+                "4\uFE0F\u20E3 - View Available Cars\n" +
+                "5\uFE0F\u20E3 - View Available Electric Cars\n" +
+                "6\uFE0F\u20E3 - View all users\n" +
+                "7\uFE0F\u20E3 - Exit");
 
     }
 }

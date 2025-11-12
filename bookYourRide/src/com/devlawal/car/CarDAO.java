@@ -1,4 +1,4 @@
-package com.sudburyRide.car;
+package com.devlawal.car;
 
 import java.math.BigDecimal;
 
