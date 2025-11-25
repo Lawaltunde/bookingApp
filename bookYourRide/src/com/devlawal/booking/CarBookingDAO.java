@@ -18,6 +18,7 @@ public class CarBookingDAO {
         for (int i = 0; i < CarBookingDAO.carBookings.length; i++){
             if (CarBookingDAO.carBookings[i] == null){
                 nextSlot = i;
+                break;
             }
         }
 

@@ -123,6 +123,7 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
     }
 
     public static void displayMenu(){
@@ -133,6 +134,5 @@ public class Main {
                 "5\uFE0F\u20E3 - View Available Electric Cars\n" +
                 "6\uFE0F\u20E3 - View all users\n" +
                 "7\uFE0F\u20E3 - Exit");
-
     }
 }
