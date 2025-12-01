@@ -4,8 +4,12 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class UserService {
-    private final UserDAO userDAOArray = new UserArrayDataAccessDAO();
-    private final UserDAO userDAOFile = new UserFileDataAccessService();
+    private  UserDAO userDAOArray =  new UserArrayDataAccessDAO();
+    private  UserDAO userDAOFile = new UserFileDataAccessService();
+
+
+    private User[] compact;
+
 
 
     public User[] getAllUsers(){
@@ -27,39 +31,39 @@ public class UserService {
             if (u != null) nonNullCount++;
         }
         if (nonNullCount == 0) return new User[0];
-        User[] compact = new User[nonNullCount];
+        compact = new User[nonNullCount];
         int idx = 0;
         for (User u : allUsers) {
             if (u != null) compact[idx++] = u;
         }
         return compact;
     }
-    public User[] getAllUsersFromArray(){
-        User[] arr = userDAOArray.getUsers();
-        if (arr == null || arr.length == 0){
-            return new User[0];
-        }
-        // compact
-        int count = 0;
-        for (User u : arr) if (u != null) count++;
-        User[] res = new User[count];
-        int i = 0;
-        for (User u : arr) if (u != null) res[i++] = u;
-        return res;
-    }
+//    public User[] getAllUsersFromArray(){
+//        User[] arr = userDAOArray.getUsers();
+//        if (arr == null || arr.length == 0){
+//            return new User[0];
+//        }
+//        // compact
+//        int count = 0;
+//        for (User u : arr) if (u != null) count++;
+//        User[] res = new User[count];
+//        int i = 0;
+//        for (User u : arr) if (u != null) res[i++] = u;
+//        return res;
+//    }
 
-    public User[] getAllUserFromFile(){
-        User[] arr = userDAOFile.getUsers();
-        if (arr == null || arr.length == 0){
-            return new User[0];
-        }
-        int count = 0;
-        for (User u : arr) if (u != null) count++;
-        User[] res = new User[count];
-        int i = 0;
-        for (User u : arr) if (u != null) res[i++] = u;
-        return res;
-    }
+//    public User[] getAllUserFromFile(){
+//        User[] arr = userDAOFile.getUsers();
+//        if (arr == null || arr.length == 0){
+//            return new User[0];
+//        }
+//        int count = 0;
+//        for (User u : arr) if (u != null) count++;
+//        User[] res = new User[count];
+//        int i = 0;
+//        for (User u : arr) if (u != null) res[i++] = u;
+//        return res;
+//    }
 
     public User getUser(UUID id){
         for (User user : getAllUsers()) {

@@ -2,7 +2,7 @@ package com.devlawal.booking;
 
 public class CarBookingDAO {
 
-    private final static CarBooking[] carBookings;
+    private static CarBooking[] carBookings;
 
     static {
         carBookings = new CarBooking[10];
@@ -31,11 +31,15 @@ public class CarBookingDAO {
 
         for (int i = 0; i < carBookings.length; i++) {
             expandedCarBooking[i] = carBookings[i];
-           }
+        }
 
+        // place the new booking into the first new slot
         expandedCarBooking[carBookings.length] = carBooking;
-        }
-        public void cancelCarBooking(){
-
-        }
+        // reassign the backing array so future calls use the expanded array
+        carBookings = expandedCarBooking;
     }
+    public void cancelCarBooking(){
+
+    }
+
+}

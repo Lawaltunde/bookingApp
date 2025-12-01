@@ -1,8 +1,11 @@
 package com.devlawal;
 
 import com.devlawal.booking.CarBooking;
+import com.devlawal.booking.CarBookingDAO;
 import com.devlawal.booking.CarBookingService;
 import com.devlawal.car.Car;
+import com.devlawal.car.CarDAO;
+import com.devlawal.car.CarService;
 import com.devlawal.user.User;
 import com.devlawal.user.UserService;
 
@@ -13,7 +16,10 @@ public class Main {
 
     public static void main(String[] args){
         UserService userService = new UserService();
-        CarBookingService carBookingService = new CarBookingService();
+        CarBookingDAO carBookingDAO = new CarBookingDAO();
+        CarService carService = new CarService();
+
+        CarBookingService carBookingService = new CarBookingService(carBookingDAO, carService);
 
         Scanner scanner = new Scanner(System.in);
 

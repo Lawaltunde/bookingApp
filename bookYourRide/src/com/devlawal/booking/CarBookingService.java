@@ -9,8 +9,13 @@ import java.util.UUID;
 
 public class CarBookingService {
 
-    private final CarBookingDAO carBookingDAOS = new CarBookingDAO();
-    private final CarService carService = new CarService();
+    private final CarBookingDAO carBookingDAOS;
+    private final CarService carService ;
+
+    public CarBookingService(CarBookingDAO carBookingDAOS, CarService carService) {
+        this.carBookingDAOS = carBookingDAOS;
+        this.carService = carService;
+    }
 
     public UUID bookCars(User user, String regNumber){
         Car[] availableCars = getAvailableCars();
@@ -21,7 +26,8 @@ public class CarBookingService {
             if(availableCar.getRegNumber().equals(regNumber)){
                 Car car = carService.getCar(regNumber);
                 UUID bookingId = UUID.randomUUID();
-                carBookingDAOS.book(new CarBooking(bookingId, user, LocalDateTime.now()));
+                // include the car in the booking so downstream code can access it
+                carBookingDAOS.book(new CarBooking(bookingId, user, car, LocalDateTime.now(), false));
                 return bookingId;
             }
         }
@@ -33,7 +39,8 @@ public class CarBookingService {
 
         int numberOfBookingsForUser = 0;
         for(CarBooking cb : carBooking){
-            if (cb != null || cb.getUser().getId().equals(useId)){
+            // ensure cb is not null before accessing its user
+            if (cb != null && cb.getUser() != null && cb.getUser().getId().equals(useId)){
                 ++numberOfBookingsForUser;
             }
         }
@@ -44,8 +51,9 @@ public class CarBookingService {
         int counter = 0;
 
         for(CarBooking cb : carBooking){
-            if(cb != null || cb.getUser().getId().equals(useId)){
-                userCar[counter++] = cb.getCar();
+            if(cb != null && cb.getUser() != null && cb.getUser().getId().equals(useId)){
+                // be defensive: cb.getCar() may be null if booking was created incorrectly
+                if (cb.getCar() != null) userCar[counter++] = cb.getCar();
             }
         }
         return userCar;
@@ -76,7 +84,7 @@ public class CarBookingService {
         for (Car car : cars){
             boolean booked = false;
             for (CarBooking carBooking : carBookings){
-                if(carBooking == null || !carBooking.getCar().equals(car)){
+                if(carBooking == null || carBooking.getCar() == null || !carBooking.getCar().equals(car)){
                     continue;
                 }
                 booked = true;
@@ -91,7 +99,7 @@ public class CarBookingService {
         for (Car car: cars){
             boolean booked = false;
             for(CarBooking carBooking : carBookings){
-                if(carBooking == null || !carBooking.getCar().equals(car)){
+                if(carBooking == null || carBooking.getCar() == null || !carBooking.getCar().equals(car)){
                     continue;
                 }
                 booked = true;

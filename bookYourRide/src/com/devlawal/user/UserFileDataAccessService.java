@@ -64,7 +64,12 @@ public class UserFileDataAccessService implements UserDAO{
 
     @Override
     public User[] getUsers() {
-        // ensure the users array is populated from file before returning
+        // Lazy-load users from file once to avoid duplicating entries when called repeatedly
+        for (User u : users) {
+            if (u != null) {
+                return users;
+            }
+        }
         return getUserFromFile();
     }
 }
