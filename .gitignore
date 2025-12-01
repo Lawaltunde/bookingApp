@@ -1,0 +1,66 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Build output
+/out/
+out/
+/target/
+/build/
+
+# Gradle
+.gradle/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# logs
+*.log
+
+# other
+*.tmp
+
+# Keep src generated output
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# IDE and build directories (project-specific)
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+# STS/IDE caches
+.sts4-cache
+
+# exclude distribution folders
+/dist/
+
+# local settings
+.local
+
+# ignore compiled output folders
+out/production/
