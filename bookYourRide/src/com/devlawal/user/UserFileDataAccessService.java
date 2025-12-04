@@ -2,17 +2,19 @@ package com.devlawal.user;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
 public class UserFileDataAccessService implements UserDAO{
 
-    private static User[] users;
+    private final static List<User> users;
 
     static{
-        users = new User[10];
+        users = new ArrayList<>();
     }
-    public User[] getUserFromFile(){
+    public List<User> getUserFromFile(){
         // prefer project-relative CSV file
         File file = new File("bookYourRide/src/users.csv");
         if (!file.exists()) {
@@ -47,23 +49,25 @@ public class UserFileDataAccessService implements UserDAO{
         String name = userData[1].trim();
         UUID id = UUID.fromString(idStr);
 
+        users.add(new User(id, name));
+
         // find first empty slot
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] == null) {
-                users[i] = new User(id, name);
-                return;
-            }
-        }
+//        for (int i = 0; i < users.length; i++) {
+//            if (users[i] == null) {
+//                users[i] = new User(id, name);
+//                return;
+//            }
+//        }
 
         // array full -> expand and add
-        User[] temp = new User[users.length + 5];
-        System.arraycopy(users, 0, temp, 0, users.length);
-        temp[users.length] = new User(id, name);
-        users = temp;
+//        User[] temp = new User[users.length + 5];
+//        System.arraycopy(users, 0, temp, 0, users.length);
+//        temp[users.length] = new User(id, name);
+//        users = temp;
     }
 
     @Override
-    public User[] getUsers() {
+    public List<User> getUsers() {
         // Lazy-load users from file once to avoid duplicating entries when called repeatedly
         for (User u : users) {
             if (u != null) {

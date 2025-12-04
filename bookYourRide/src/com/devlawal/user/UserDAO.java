@@ -1,7 +1,8 @@
 package com.devlawal.user;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface UserDAO {
-    User[] getUsers();
+    List<User> getUsers();
 }

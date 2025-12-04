@@ -1,69 +1,47 @@
 package com.devlawal.user;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 public class UserService {
-    private  UserDAO userDAOArray =  new UserArrayDataAccessDAO();
-    private  UserDAO userDAOFile = new UserFileDataAccessService();
+    private final UserDAO userDAOArray =  new UserArrayDataAccessDAO();
+    private final UserDAO userDAOFile = new UserFileDataAccessService();
 
 
-    private User[] compact;
+    private final List<User> compact = new ArrayList<>();
 
 
 
-    public User[] getAllUsers(){
-        User[] fileUsers = userDAOFile.getUsers();
-        User[] arrayUsers = userDAOArray.getUsers();
-        int fileLen = fileUsers == null ? 0 : fileUsers.length;
-        int arrayLen = arrayUsers == null ? 0 : arrayUsers.length;
+    public List<User> getAllUsers(){
+        List<User> fileUsers = userDAOFile.getUsers();
+        List<User> arrayUsers = userDAOArray.getUsers();
+        compact.addAll(fileUsers);
+        compact.addAll(arrayUsers);
+//        int fileLen = fileUsers == null ? 0 : fileUsers.length;
+//        int arrayLen = arrayUsers == null ? 0 : arrayUsers.length;
 
-        User[] allUsers = new User[fileLen + arrayLen];
-        if (fileLen > 0) {
-            System.arraycopy(fileUsers, 0, allUsers, 0, fileLen);
-        }
-        if (arrayLen > 0) {
-            System.arraycopy(arrayUsers, 0, allUsers, fileLen, arrayLen);
-        }
+//        User[] allUsers = new User[fileLen + arrayLen];
+//        if (fileLen > 0) {
+//            System.arraycopy(fileUsers, 0, allUsers, 0, fileLen);
+//        }
+//        if (arrayLen > 0) {
+//            System.arraycopy(arrayUsers, 0, allUsers, fileLen, arrayLen);
+//        }
         // compact out null slots before returning
-        int nonNullCount = 0;
-        for (User u : allUsers) {
-            if (u != null) nonNullCount++;
-        }
-        if (nonNullCount == 0) return new User[0];
-        compact = new User[nonNullCount];
-        int idx = 0;
-        for (User u : allUsers) {
-            if (u != null) compact[idx++] = u;
-        }
+//        int nonNullCount = 0;
+//        for (User u : allUsers) {
+//            if (u != null) nonNullCount++;
+//        }
+//        if (nonNullCount == 0) return new User[0];
+//        compact = new User[nonNullCount];
+//        int idx = 0;
+//        for (User u : allUsers) {
+//            if (u != null) compact[idx++] = u;
+//        }
         return compact;
     }
-//    public User[] getAllUsersFromArray(){
-//        User[] arr = userDAOArray.getUsers();
-//        if (arr == null || arr.length == 0){
-//            return new User[0];
-//        }
-//        // compact
-//        int count = 0;
-//        for (User u : arr) if (u != null) count++;
-//        User[] res = new User[count];
-//        int i = 0;
-//        for (User u : arr) if (u != null) res[i++] = u;
-//        return res;
-//    }
-
-//    public User[] getAllUserFromFile(){
-//        User[] arr = userDAOFile.getUsers();
-//        if (arr == null || arr.length == 0){
-//            return new User[0];
-//        }
-//        int count = 0;
-//        for (User u : arr) if (u != null) count++;
-//        User[] res = new User[count];
-//        int i = 0;
-//        for (User u : arr) if (u != null) res[i++] = u;
-//        return res;
-//    }
 
     public User getUser(UUID id){
         for (User user : getAllUsers()) {

@@ -9,6 +9,7 @@ import com.devlawal.car.CarService;
 import com.devlawal.user.User;
 import com.devlawal.user.UserService;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -57,8 +58,8 @@ public class Main {
     }
 
     private static void displayAllUsers(UserService userService) {
-        User[] users = userService.getAllUsers();
-        if (users.length == 0) {
+        List<User> users = userService.getAllUsers();
+        if (users.isEmpty()) {
             System.out.println("❌ No users in the system");
             return;
         }
