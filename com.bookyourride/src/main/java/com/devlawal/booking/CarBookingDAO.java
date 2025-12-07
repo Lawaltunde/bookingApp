@@ -1,0 +1,51 @@
+package com.devlawal.booking;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CarBookingDAO {
+
+    private static List<CarBooking> carBookings;
+
+    static {
+        carBookings = new ArrayList<>();
+    }
+
+    public List<CarBooking> getCarBookings(){
+        return carBookings;
+    }
+
+    public void book(CarBooking carBooking){
+
+
+        carBookings.add(carBooking);
+//        int nextSlot = -1;
+//
+//        for (int i = 0; i < CarBookingDAO.carBookings.length; i++){
+//            if (CarBookingDAO.carBookings[i] == null){
+//                nextSlot = i;
+//                break;
+//            }
+//        }
+//
+//        if(nextSlot > -1){
+//            carBookings[nextSlot] = carBooking;
+//            return;
+//        }
+//
+//        CarBooking[] expandedCarBooking = new CarBooking[carBookings.length + 10];
+//
+//        for (int i = 0; i < carBookings.length; i++) {
+//            expandedCarBooking[i] = carBookings[i];
+//        }
+//
+//        // place the new booking into the first new slot
+//        expandedCarBooking[carBookings.length] = carBooking;
+//        // reassign the backing array so future calls use the expanded array
+//        carBookings = expandedCarBooking;
+    }
+    public void cancelCarBooking(){
+
+    }
+
+}

@@ -2,10 +2,7 @@ package com.devlawal.user;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 public class UserFileDataAccessService implements UserDAO{
 
@@ -16,7 +13,7 @@ public class UserFileDataAccessService implements UserDAO{
     }
     public List<User> getUserFromFile(){
         // prefer project-relative CSV file
-        File file = new File("bookYourRide/src/users.csv");
+        File file = new File(getClass().getClassLoader().getResource("users.csv").getPath());
         if (!file.exists()) {
             // fallback to ./users.csv or ./users.txt if someone runs from different cwd
             File alt = new File("./users.csv");
@@ -51,19 +48,6 @@ public class UserFileDataAccessService implements UserDAO{
 
         users.add(new User(id, name));
 
-        // find first empty slot
-//        for (int i = 0; i < users.length; i++) {
-//            if (users[i] == null) {
-//                users[i] = new User(id, name);
-//                return;
-//            }
-//        }
-
-        // array full -> expand and add
-//        User[] temp = new User[users.length + 5];
-//        System.arraycopy(users, 0, temp, 0, users.length);
-//        temp[users.length] = new User(id, name);
-//        users = temp;
     }
 
     @Override

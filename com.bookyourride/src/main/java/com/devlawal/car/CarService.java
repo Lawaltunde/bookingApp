@@ -1,9 +1,12 @@
 package com.devlawal.car;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CarService {
     private final CarDAO carDAO = new CarDAO();
 
-    public Car[] getCars(){
+    public List<Car> getCars(){
         return carDAO.getAllCars();
     }
 
@@ -16,12 +19,12 @@ public class CarService {
         throw new IllegalArgumentException("regNumber can't be null");
         }
 
-    public Car[] getAllElectricCars() {
+    public List<Car> getAllElectricCars() {
         int countElectricCars = 0;
-        Car[] cars = getCars();
+        List<Car> cars = getCars();
 
-        if (cars.length == 0) {
-            return new Car[0];
+        if (cars.isEmpty()) {
+            return List.of(new Car[0]);
         }
 
         for (Car car : cars) {
@@ -31,16 +34,17 @@ public class CarService {
         }
 
         if (countElectricCars == 0) {
-            return new Car[0];
+            return List.of(new Car[0]);
         }
 
         int index = 0;
 
-        Car[] allElectricCars = new Car[countElectricCars];
+        List<Car> allElectricCars = new ArrayList<>();
 
-        for (int i = 0; i < cars.length; i++) {
-            if (cars[i].isElectricCar()) {
-                allElectricCars[index++] = cars[i];
+        for (int i = 0; i < cars.size(); i++) {
+            if (cars.get(i).isElectricCar()) {
+                allElectricCars.add(cars.get(i));
+                index++;
             }
         }
         return allElectricCars;

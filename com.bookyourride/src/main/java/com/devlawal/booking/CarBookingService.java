@@ -5,6 +5,8 @@ import com.devlawal.car.CarService;
 import com.devlawal.user.User;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class CarBookingService {
@@ -18,8 +20,8 @@ public class CarBookingService {
     }
 
     public UUID bookCars(User user, String regNumber){
-        Car[] availableCars = getAvailableCars();
-        if (availableCars.length == 0){
+        List<Car> availableCars = getAvailableCars();
+        if (availableCars.isEmpty()){
             throw new IllegalStateException("No car Available for renting");
         }
         for (Car availableCar : availableCars){
@@ -34,8 +36,8 @@ public class CarBookingService {
         throw new IllegalStateException("Already booked car with regNumber"+ regNumber);
     }
 
-    public Car[] getUserBookedCars(UUID useId){
-        CarBooking[] carBooking = carBookingDAOS.getCarBookings();
+    public List<Car> getUserBookedCars(UUID useId){
+        List<CarBooking> carBooking = carBookingDAOS.getCarBookings();
 
         int numberOfBookingsForUser = 0;
         for(CarBooking cb : carBooking){
@@ -45,37 +47,37 @@ public class CarBookingService {
             }
         }
         if (numberOfBookingsForUser == 0){
-            return new Car[0];
+            return  List.of(new Car[0]);
         }
-        Car[] userCar = new Car[numberOfBookingsForUser];
+        List<Car> userCar = new ArrayList<>();
         int counter = 0;
 
         for(CarBooking cb : carBooking){
             if(cb != null && cb.getUser() != null && cb.getUser().getId().equals(useId)){
                 // be defensive: cb.getCar() may be null if booking was created incorrectly
-                if (cb.getCar() != null) userCar[counter++] = cb.getCar();
+                if (cb.getCar() != null) userCar.add(cb.getCar());
             }
         }
         return userCar;
     }
 
-    public Car[] getAvailableCars(){
+    public List<Car> getAvailableCars(){
         return getCars(carService.getCars());
     }
 
-    public Car[] getAvailableElectricCars(){
+    public List<Car> getAvailableElectricCars(){
         return getCars(carService.getAllElectricCars());
     }
 
 
-    private Car[] getCars(Car[] cars){
-        if (cars.length == 0){
-            return new Car[0];
+    private List<Car> getCars(List<Car> cars){
+        if (cars.isEmpty()){
+            return List.of(new Car[0]);
         }
 
-        CarBooking[] carBookings = carBookingDAOS.getCarBookings();
+        List<CarBooking> carBookings = carBookingDAOS.getCarBookings();
 
-        if (carBookings.length == 0){
+        if (carBookings.isEmpty()){
             return cars;
         }
 
@@ -93,7 +95,7 @@ public class CarBookingService {
                 ++availableCarCount;
             }
         }
-        Car[] availableCars = new Car[availableCarCount];
+        List<Car> availableCars = new ArrayList<>();
         int index = 0;
 
         for (Car car: cars){
@@ -105,15 +107,15 @@ public class CarBookingService {
                 booked = true;
             }
             if (!booked){
-                availableCars[index++] = car;
+                availableCars.add(car);
             }
         }
         return availableCars;
     }
 
 
-    public CarBooking[] getBooking(){
-        CarBooking[] carBookings = carBookingDAOS.getCarBookings();
+    public List<CarBooking> getBooking(){
+        List<CarBooking> carBookings = carBookingDAOS.getCarBookings();
 
         int numberOfBooking = 0;
 
@@ -123,14 +125,14 @@ public class CarBookingService {
             }
         }
         if (numberOfBooking == 0){
-            return new CarBooking[0];
+            return List.of(new CarBooking[0]);
         }
 
-        CarBooking[] bookings = new CarBooking[numberOfBooking];
+        List<CarBooking> bookings = new ArrayList<>();
         int index = 0;
         for (CarBooking carBooking : carBookings){
             if(carBooking != null){
-                bookings[index++] = carBooking;
+                bookings.add(carBooking);
             }
         }
         return bookings;
