@@ -3,11 +3,12 @@ package com.devlawal.booking;
 import com.devlawal.car.CarDAO;
 import com.devlawal.car.CarService;
 import com.devlawal.user.User;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 public class CarBookingTest {
 

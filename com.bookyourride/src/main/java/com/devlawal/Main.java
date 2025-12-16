@@ -4,7 +4,6 @@ import com.devlawal.booking.CarBooking;
 import com.devlawal.booking.CarBookingDAO;
 import com.devlawal.booking.CarBookingService;
 import com.devlawal.car.Car;
-import com.devlawal.car.CarDAO;
 import com.devlawal.car.CarService;
 import com.devlawal.user.User;
 import com.devlawal.user.UserService;
@@ -134,12 +133,14 @@ public class Main {
     }
 
     public static void displayMenu(){
-        System.out.println("\n1\uFE0F\u20E3 - Book Car\n" +
-                "2\uFE0F\u20E3 - View All User Booked Cars \n" +
-                "3\uFE0F\u20E3 - View All Bookings\n" +
-                "4\uFE0F\u20E3 - View Available Cars\n" +
-                "5\uFE0F\u20E3 - View Available Electric Cars\n" +
-                "6\uFE0F\u20E3 - View all users\n" +
-                "7\uFE0F\u20E3 - Exit");
+        System.out.println("""
+                1️⃣ - Book Car
+                2️⃣ - View All User Booked Cars
+                3️⃣ - View All Bookings
+                4️⃣ - View Available Cars
+                5️⃣ - View Available Electric Cars
+                6️⃣ - View all users
+                7️⃣ - Exit
+                """);
     }
 }
